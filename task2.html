@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Your Plan | NovaSpace</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#080d1c;--panel:#111a31;--panel2:#151f3a;--text:#f4f6ff;--muted:#9ca9c7;--purple:#9b7bff;--cyan:#42dfd0;--line:#293656}
+body{
+  min-height:100vh;padding:54px 22px 42px;font-family:Inter,Arial,sans-serif;color:var(--text);
+  background:radial-gradient(ellipse at 12% 8%,#35245f 0,transparent 34%),
+             radial-gradient(ellipse at 92% 78%,#103e4c 0,transparent 32%),var(--bg);
+}
+.wrapper{max-width:1120px;margin:auto}
+.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:52px}
+.brand{font-size:20px;font-weight:800;letter-spacing:1px}
+.brand span{color:var(--cyan)}
+.pill{font-size:12px;color:#c6baff;border:1px solid #584b88;border-radius:30px;padding:8px 13px;background:#211b3e}
+.intro{text-align:center;margin:0 auto 34px;max-width:680px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--cyan);font-weight:700;margin-bottom:15px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-1.8px;margin-bottom:14px}
+h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{color:var(--muted);font-size:15px;line-height:1.7}
+.billing{display:flex;align-items:center;justify-content:center;gap:14px;margin:27px 0 40px;color:var(--muted);font-size:13px;font-weight:700}
+.billing .active-label{color:var(--text)}
+.switch{position:relative;width:52px;height:28px}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#4c5875;border-radius:30px;cursor:pointer;transition:.25s}
+.slider:before{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;background:white;border-radius:50%;transition:.25s}
+.switch input:checked+.slider{background:linear-gradient(90deg,var(--purple),var(--cyan))}
+.switch input:checked+.slider:before{transform:translateX(24px)}
+.save{color:var(--cyan);font-size:11px;border:1px solid #246c6d;padding:6px 9px;border-radius:20px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plan{position:relative;background:linear-gradient(160deg,#17213d,#10182d);border:1px solid var(--line);border-radius:20px;padding:28px 25px 25px;display:flex;flex-direction:column;min-height:430px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.plan:hover{transform:translateY(-7px);border-color:#7864c8;box-shadow:0 18px 45px #0005}
+.plan.featured{border:1.5px solid var(--purple);background:linear-gradient(155deg,#29214c,#121d34 70%);box-shadow:0 0 34px #8063d52a;transform:translateY(-10px)}
+.plan.featured:hover{transform:translateY(-16px)}
+.ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);white-space:nowrap;background:linear-gradient(90deg,var(--purple),#6e61d9);color:white;font-size:10px;font-weight:800;letter-spacing:1px;padding:7px 15px;border-radius:20px}
+.plan-tag{font-size:11px;letter-spacing:1.7px;text-transform:uppercase;color:var(--cyan);font-weight:800;margin-bottom:13px}
+h2{font-size:23px;margin-bottom:8px}
+.desc{font-size:13px;color:var(--muted);line-height:1.5;min-height:40px}
+.price-line{display:flex;align-items:baseline;gap:5px;margin:23px 0 5px}
+.currency{font-size:18px;color:#c7cfe4}
+.price{font-size:39px;font-weight:800;letter-spacing:-1.5px}
+.period{font-size:12px;color:var(--muted)}
+.note{font-size:11px;color:#8290b1;min-height:17px}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0 17px}
+ul{list-style:none;display:grid;gap:13px;margin-bottom:26px}
+li{font-size:13px;color:#d6def2;display:flex;gap:10px;align-items:flex-start}
+li:before{content:"✓";display:grid;place-items:center;flex:0 0 18px;height:18px;border-radius:50%;background:#1d4550;color:var(--cyan);font-size:11px;font-weight:900}
+button{margin-top:auto;width:100%;border:1px solid #526080;background:#1a2745;color:var(--text);padding:13px 16px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;transition:.2s}
+button:hover{border-color:var(--cyan);background:#203654}
+.featured button{border:0;background:linear-gradient(100deg,var(--purple),#5d80e9);box-shadow:0 7px 20px #7760d444}
+.featured button:hover{filter:brightness(1.12)}
+#feedback{text-align:center;min-height:22px;margin:25px 0 0;color:var(--cyan);font-size:13px}
+.foot{text-align:center;margin-top:24px;color:#71809f;font-size:11px}
+@media(max-width:850px){.plans{grid-template-columns:1fr;max-width:480px;margin:auto;gap:22px}.plan,.plan.featured{min-height:0;transform:none}.plan.featured:hover,.plan:hover{transform:translateY(-4px)}body{padding-top:28px}.topline{margin-bottom:38px}.desc{min-height:0}}
+@media(max-width:420px){body{padding:22px 14px 30px}.topline{margin-bottom:32px}.pill{font-size:10px}.plan{padding:25px 21px}.price{font-size:35px}}
+</style>
+</head>
+<body>
+<main class="wrapper">
+  <div class="topline">
+    <div class="brand">NOVA<span>SPACE</span></div>
+    <div class="pill">PLANS THAT GROW WITH YOU</div>
+  </div>
+
+  <section class="intro">
+    <div class="eyebrow">Simple. Flexible. Powerful.</div>
+    <h1>Make room for <span>what's next.</span></h1>
+    <p class="subtitle">Pick a plan that fits your workflow today. Upgrade whenever your ideas get bigger.</p>
+  </section>
+
+  <div class="billing">
+    <span id="monthlyLabel" class="active-label">Monthly</span>
+    <label class="switch" aria-label="Toggle annual billing">
+      <input type="checkbox" id="billingToggle">
+      <span class="slider"></span>
+    </label>
+    <span id="annualLabel">Yearly</span>
+    <span class="save">SAVE 2 MONTHS</span>
+  </div>
+
+  <section class="plans">
+    <article class="plan">
+      <div>
+        <div class="plan-tag">01 / START</div>
+        <h2>Launch</h2>
+        <p class="desc">Everything you need to get your first project moving.</p>
+        <div class="price-line"><span class="currency">₹</span><span class="price" data-month="0" data-year="0">0</span></div>
+        <div class="period">Free forever</div>
+        <div class="note">No card required</div>
+        <hr>
+        <ul>
+          <li>2 active projects</li>
+          <li>Basic workspace tools</li>
+          <li>Community support</li>
+          <li>1 GB cloud storage</li>
+        </ul>
+      </div>
+      <button type="button" data-plan="Launch">Get started</button>
+    </article>
+
+    <article class="plan featured">
+      <div class="ribbon">MOST POPULAR</div>
+      <div>
+        <div class="plan-tag">02 / GROW</div>
+        <h2>Studio</h2>
+        <p class="desc">More room, more control, and better tools for your work.</p>
+        <div class="price-line"><span class="currency">₹</span><span class="price" data-month="699" data-year="6990">699</span></div>
+        <div class="period">per month</div>
+        <div class="note">Billed monthly</div>
+        <hr>
+        <ul>
+          <li>Unlimited active projects</li>
+          <li>Advanced workspace tools</li>
+          <li>Priority email support</li>
+          <li>100 GB cloud storage</li>
+        </ul>
+      </div>
+      <button type="button" data-plan="Studio">Choose Studio</button>
+    </article>
+
+    <article class="plan">
+      <div>
+        <div class="plan-tag">03 / SCALE</div>
+        <h2>Collective</h2>
+        <p class="desc">A shared space for teams building something ambitious.</p>
+        <div class="price-line"><span class="currency">₹</span><span class="price" data-month="1499" data-year="14990">1,499</span></div>
+        <div class="period">per month</div>
+        <div class="note">Billed monthly</div>
+        <hr>
+        <ul>
+          <li>Everything in Studio</li>
+          <li>Up to 10 team members</li>
+          <li>Shared team workspace</li>
+          <li>Dedicated support</li>
+        </ul>
+      </div>
+      <button type="button" data-plan="Collective">Talk to our team</button>
+    </article>
+  </section>
+  <p id="feedback" aria-live="polite"></p>
+  <div class="foot">NOVA SPACE · Find the space to do your best work.</div>
+</main>
+
+<script>
+const toggle = document.getElementById("billingToggle");
+const prices = document.querySelectorAll(".price");
+const periods = document.querySelectorAll(".period");
+const notes = document.querySelectorAll(".note");
+
+toggle.addEventListener("change", function () {
+  document.getElementById("monthlyLabel").classList.toggle("active-label", !this.checked);
+  document.getElementById("annualLabel").classList.toggle("active-label", this.checked);
+
+  prices.forEach((price, index) => {
+    const value = this.checked ? price.dataset.year : price.dataset.month;
+    price.textContent = Number(value).toLocaleString("en-IN");
+    periods[index].textContent = index === 0 ? "Free forever" : (this.checked ? "per year" : "per month");
+    notes[index].textContent = index === 0 ? "No card required" : (this.checked ? "Billed yearly" : "Billed monthly");
+  });
+});
+
+document.querySelectorAll(".plan button").forEach(button => {
+  button.addEventListener("click", function () {
+    document.getElementById("feedback").textContent =
+      "You selected the " + this.dataset.plan + " plan. Thanks for exploring NovaSpace!";
+  });
+});
+</script>
+</body>
+</html>
